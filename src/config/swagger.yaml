@@ -5,13 +5,13 @@ info:
   version: 0.1.9
 
 servers:
-  - url: http://todo-app-api-production-2c38.up.railway.app/api/todos
+  - url: http://todo-app-api-production-2c38.up.railway.app
     description: production server
-  - url: http://localhost:3000/api
+  - url: http://localhost:3000
     description: local server
 
 paths:
-  /todos:
+  /api/todos:
     get:
       tags:
         - Todos
@@ -23,4 +23,79 @@ paths:
               schema:
                 type: array
                 items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    completed:
+                      type: boolean
+
+  /api/send:
+    post:
+      summary: Create a new todo
+      tags: [Todos]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
                   type: string
+                  description: The title of the todo
+                completed:
+                  type: boolean
+                  description: Whether the todo is completed or not
+      responses:
+        "200":
+          description: Successfully created todo
+          content:
+            application/json:
+              example:
+                message: Successfully created todo
+                todo:
+                  title: Sample Todo
+                  completed: false
+
+  /api/{id}:
+    put:
+      summary: Toggle the completion status of a todo
+      tags: [Todos]
+      parameters:
+        - name: id
+          in: path
+          description: ID of the todo to be updated
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Successfully changed todo
+        "500":
+          description: Internal Server Error
+        content:
+          application/json:
+            example:
+              message: Successfully changed todo
+
+  /api/delete/{id}:
+    delete:
+      summary: Delete todo
+      tags: [Todos]
+      parameters:
+        - name: id
+          in: path
+          description: ID of the todo to be updated
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Successfully changed todo
+        "500":
+          description: Internal Server Error
+        content:
+          application/json:
+            example:
+              message: Successfully changed todo

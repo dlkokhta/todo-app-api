@@ -14,7 +14,7 @@ connectToMongo();
 
 server.use(bodyParser.json());
 
-server.use("/api", todoRouter);
+server.use("/api", todoRouter); //get
 
 server.use("/", ...swaggerMiddleware());
 

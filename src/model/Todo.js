@@ -7,10 +7,7 @@ const todoSchema = new Schema({
     type: Schema.Types.String,
     required: true,
   },
-  id: {
-    type: Schema.Types.Number,
-    required: true,
-  },
+  
   completed: {
     type: Schema.Types.Boolean,
     required: true,

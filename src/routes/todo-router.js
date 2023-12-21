@@ -1,11 +1,16 @@
 import express from "express";
-import { getallTodos, getallTodos2 } from "../controllers/todo-controller.js";
+import {
+  deleteTodo,
+  getallTodos,
+  postTodo,
+  putTodo,
+} from "../controllers/todo-controller.js";
 
 const todoRouter = express.Router();
 
 todoRouter.get("/todos", getallTodos);
-todoRouter.get("/todos2", getallTodos2);
+todoRouter.post("/send", postTodo);
+todoRouter.put("/:id", putTodo);
+todoRouter.delete("/delete/:id", deleteTodo);
 
 export default todoRouter;
-
-("/api/todos");
