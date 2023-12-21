@@ -30,7 +30,7 @@ export const putTodo = async (req, res) => {
 export const deleteTodo = async (req, res) => {
   try {
     const { id } = req.params;
-    const todo = await Todo.deleteOne(id);
+    const todo = await Todo.findByIdAndDelete(id);
 
     if (!todo) {
       res.status(404).send({ error: "Todo not found" });
